@@ -2,6 +2,7 @@ package com.carwala.backend.controller;
 
 import com.carwala.backend.entity.Car;
 import com.carwala.backend.entity.Phone;
+import com.carwala.backend.exception.CarNotFoundException;
 import com.carwala.backend.service.CarWalaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +29,14 @@ public class CarController {
         return carWalaService.getAllCars();
     }
 
+    
+    // car not found exception 
     @GetMapping("/{id}")
     public ResponseEntity<Car> getCar(@PathVariable long id) {
         Car car = carWalaService.getCarById(id);
 
         if (car == null) {
-            return ResponseEntity.notFound().build();
+            throw new CarNotFoundException("Car with ID " + id + " not found");
         }
 
         return ResponseEntity.ok(car);
