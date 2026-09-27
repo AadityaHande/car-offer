@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .requestMatchers("/cars").hasRole("USER")
                 // security for swagger and actuator endpoints
                 .requestMatchers("/actuator/health").permitAll()
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN")
+                .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN")
                 .requestMatchers("/actuator/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
